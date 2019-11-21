@@ -36,14 +36,14 @@ public class Servidor {
 
                 //Leo el mensaje que me envia
                 String mensaje = in.readUTF();
-                String usuario = "Isi";
+                String usuario = in.readUTF();
 
                 //Mando el mensaje a mi archivo Palabras.log
                 Archivo escribir_palabra = new Archivo(mensaje, usuario);
                 escribir_palabra.crear();
 
                 //Le envio un mensaje
-                out.writeUTF("Bienvenido");
+                out.writeUTF("Bienvenido" + usuario);
 
                 //Cierro el socket
                 sc.close();
