@@ -1,18 +1,16 @@
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.lang.ref.Cleaner;
 import java.net.Socket;
 import java.util.Random;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Cliente {
-    private static boolean[] visitados = new boolean[5];
+    private static boolean[] visitados = new boolean[5];//creo un array de boleanos para saber que servidores ya visite
 
     Cliente(int id_server, String usuario) {
         visitados[id_server] = true;
+
         //Host del servidor
         final String[] HOST = {
                 "127.0.0.1",
@@ -24,6 +22,8 @@ public class Cliente {
 
         //Puerto del servidor
         final int PUERTO = 5000;
+
+        //Declaro mis inputs y outputs
         DataInputStream in;
         DataOutputStream out;
 
@@ -37,7 +37,7 @@ public class Cliente {
             //Creo el socket para conectarme con el cliente
             Socket sc = new Socket(HOST[id_server], PUERTO);
 
-            //Definimos nuestras variables de entrada y salida del socket
+            //Instanciamos nuestras variables de entrada y salida del socket
             in = new DataInputStream(sc.getInputStream());
             out = new DataOutputStream(sc.getOutputStream());
 
@@ -50,9 +50,12 @@ public class Cliente {
 
             System.out.println(mensaje);
 
-            sc.close();
+            sc.close(); //Cerramos el socket
 
         } catch (IOException ex) {
+            /* En esta parte para hacerlo a prueba de fallas usamos la falla misma
+            al momento de crearse una excepcion
+             */
             int fin = 0;
             for (boolean visitado : visitados) {
                 if (visitado) fin++;
@@ -63,7 +66,6 @@ public class Cliente {
                 do {
                     Random random = new Random();
                     id = (int) Math.floor(random.nextDouble() * 4.0 + 1);
-
                 } while (visitados[(id)]);
 
                 System.out.println(id);
@@ -82,6 +84,5 @@ public class Cliente {
         String usuario = System.getProperty("user.name");
 
         new Cliente(0, usuario);
-
     }
 }

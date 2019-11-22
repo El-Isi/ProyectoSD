@@ -1,6 +1,4 @@
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.logging.Level;
@@ -38,17 +36,17 @@ public class Servidor {
                 String mensaje = in.readUTF();
                 String usuario = in.readUTF();
 
+
                 //Mando el mensaje a mi archivo Palabras.log
                 Archivo escribir_palabra = new Archivo(mensaje, usuario);
                 escribir_palabra.crear();
 
                 //Le envio un mensaje
-                out.writeUTF("Bienvenido" + usuario);
+                out.writeUTF("Bienvenido " + usuario);
 
                 //Cierro el socket
                 sc.close();
                 System.out.println("Cliente desconectado");
-
             }
 
         } catch (IOException ex) {

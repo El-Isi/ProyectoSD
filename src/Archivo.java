@@ -24,8 +24,8 @@ public class Archivo {
                 Date fecha = new Date();
                 outp.append("\r\n");
                 outp.write(fecha + "\t   " + mensaje + "\t   " + usuario);
-                outp.close();
                 outp.append("\r\n");
+                outp.close();
             } catch (IOException ex) {
                 System.out.println("Error: " + ex.getMessage());
             }
