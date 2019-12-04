@@ -10,7 +10,7 @@ public class Cliente {
 
     //Host del servidor
     final String[] HOST = {
-            "127.0.0.1",
+            "18.208.167.208",//Juan Jose Jimenez Arreola
             "54.89.184.40",//Luis Angel Vivanco Castellanos
             "54.221.59.91",//Isidro Fernando Gonzalez Gomez
             "3.15.8.55", //Luis Angel Duran Garcia
