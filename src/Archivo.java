@@ -5,19 +5,25 @@ import java.io.IOException;
 import java.util.Date;
 
 public class Archivo {
+    
+    //Declaramos nuestras variables para guardar el usuario y mensaje
     private String mensaje;
     private String usuario;
 
     Archivo(String mensaje, String usuario){
+        //Asignamos a nuestras variables el contenido por parametro  a travez del contructor
         this.mensaje = mensaje;
         this.usuario = usuario;
     }
 
     public void crear() throws IOException {
-        String ruta = "C:\\Users\\el_re\\Desktop\\Palabras.log";
+        
+        //Declaramos la ruta de nuestro archivo el nombre que tendra y donde estara ubicado
+        String ruta = "/home/ubuntu/Palabras.log";
         File archivo = new File(ruta);
 
         if (archivo.exists()) {
+            //Si el archivo existe simplemente añadira los mensaje
             try {
                 FileWriter fstream = new FileWriter(ruta, true);
                 BufferedWriter outp = new BufferedWriter(fstream);
@@ -31,6 +37,7 @@ public class Archivo {
             }
 
         } else {
+            //Si el archivo no existe, lo creara y añadira una leyenda para saber el formato que tiene e incertara el primer mensaje
             archivo.createNewFile();
             try {
                 FileWriter fstream = new FileWriter(ruta, true);
