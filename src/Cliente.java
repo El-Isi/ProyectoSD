@@ -9,7 +9,7 @@ public class Cliente {
     private static boolean[] visitados = new boolean[5];//creo un array de boleanos para saber que servidores ya visite
 
     Cliente(int id_server, String usuario) {
-        visitados[id_server] = true;
+        visitados[id_server] = true;//Siempre el servidor 1° es el primero que visitaremos
 
         //Host del servidor
         final String[] HOST = {
@@ -45,21 +45,27 @@ public class Cliente {
             out.writeUTF(palabra);
             out.writeUTF(usuario);
 
-            //Recibo el mensaje del servidor
+            //Recibo el mensaje del servidor y lo imprimo
             String mensaje = in.readUTF();
-
             System.out.println(mensaje);
 
             sc.close(); //Cerramos el socket
 
         } catch (IOException ex) {
+            
             /* En esta parte para hacerlo a prueba de fallas usamos la falla misma
-            al momento de crearse una excepcion
+            al momento de crearse una excepcion y de manera recursiva volvemos a llamar
+            a nuestra clase Cliente
              */
-            int fin = 0;
+            
+            int fin = 0; //Declaramos una variable para nuestra condicion de paro
+            
+            //Aqui declaramos un foreach donde por cada servidor visitado incrementaremos nuestra condicion de paro
             for (boolean visitado : visitados) {
                 if (visitado) fin++;
             }
+            
+            //en esta comparacion si no hemos visitado todos nuestros servidoresque siga intentando conectarse aleatoriamente
             if (fin < 5) {
                 int id;
 
