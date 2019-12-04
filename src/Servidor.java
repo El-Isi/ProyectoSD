@@ -8,10 +8,10 @@ public class Servidor {
 
     public static void main(String[] args) {
 
-        ServerSocket servidor = null;
-        Socket sc = null;
-        DataInputStream in;
-        DataOutputStream out;
+        ServerSocket servidor = null; //Declaramos el socket del servidor
+        Socket sc = null; //Declaramos el socket del cliente que se conectara a nuestro servidor
+        DataInputStream in; //Declaramos nuestra entrada
+        DataOutputStream out; //Declaramos nuestra salida
 
         //puerto de nuestro servidor
         final int PUERTO = 5000;
@@ -26,9 +26,9 @@ public class Servidor {
 
                 //Espero a que un cliente se conecte
                 sc = servidor.accept();
-                char[] output;
-
                 System.out.println("Cliente conectado");
+                
+                //Inicializamos nuestra variable de entrada y salida tomando como referencia el socket del cliente
                 in = new DataInputStream(sc.getInputStream());
                 out = new DataOutputStream(sc.getOutputStream());
 
@@ -50,6 +50,7 @@ public class Servidor {
             }
 
         } catch (IOException ex) {
+            //siemple mensaje de error en caso de que algo salga mal nos informe
             Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);
         }
 
